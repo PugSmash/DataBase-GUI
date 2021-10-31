@@ -1,4 +1,4 @@
-import logging
+import random
 from tkinter import *
 from tkinter import messagebox as msgbx
 from MainWindow import EditingPage
@@ -38,8 +38,8 @@ class LoginWindow(Tk):
             msgbx.showerror("", "The Username or Password is blank - please retry")
         else:
             self.cur.execute(
-                f"INSERT INTO UserLogin(Username, Password) VALUES (?,?)",
-                (self.username_entry.get(), self.password_entry.get()))
+                f"INSERT INTO UserLogin(Username, Password, CustomerID) VALUES (?,?,?)",
+                (self.username_entry.get(), self.password_entry.get(), random.randint(1, 1000000)))
             self.con.commit()
             msgbx.showinfo("", "You Are Signed Up")
 
@@ -53,6 +53,7 @@ class LoginWindow(Tk):
         for row in self.cur.execute("SELECT * FROM UserLogin"):
             if row[1] == username and row[2] == password:
                 msgbx.showinfo("", "SIGN IN SUCCESSFUL")
+                self.con.close()
                 edit = EditingPage()
                 edit.mainloop()
             else:
