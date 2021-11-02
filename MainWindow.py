@@ -56,7 +56,7 @@ class EditingPage(Tk):
 
     def add_data(self):
         print(self.Password_entry.get())
-        sql = f"INSERT INTO UserLogin(CustomerID, Username, Password) Values(?,?,?)"
+        sql = f"INSERT INTO UserLogin(Username, Password, CustomerID) Values(?,?,?)"
         data = (str(self.Username_entry.get()), str(self.Password_entry.get()), random.randint(1, 1000000))
         self.cur.execute(sql, data)
         self.con.commit()
