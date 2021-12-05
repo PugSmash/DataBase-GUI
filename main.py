@@ -11,11 +11,15 @@ class LoginWindow(Tk):
         super().__init__(*args, **kwargs)
         self.geometry = "400x400"
         self.title("Db GUI")
-        self.con = sqlite3.connect("CoffeeShop.db")
+        self.con = sqlite3.connect("CoffeeShop.db") # connection to the database
         self.cur = self.con.cursor()
+
+        # the base frame of the first window
 
         self.frame = Frame(self, width=400, height=400)
         self.frame.pack()
+
+        # widgets for the gui
 
         self.Title_label = Label(self.frame, text="Welcome To The Coffee Shop Db")
         self.username_label = Label(self.frame, text="username:")
@@ -24,6 +28,8 @@ class LoginWindow(Tk):
         self.password_entry = Entry(self.frame)
         self.login_button = Button(self.frame, text="login", command=self.sign_in)
         self.sign_up_button = Button(self.frame, text="sign up", command=self.sign_up)
+
+        # this is the placing of the widgets
 
         self.Title_label.place(x=100, y=50)
         self.username_label.place(x=50, y=100)
